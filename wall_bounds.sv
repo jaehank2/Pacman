@@ -1,7 +1,8 @@
 module wall_bounds(input [9:0]  DrawX, DrawY,	
-							output logic wall_en
-							);
-	  always_comb
+		   output logic wall_en
+		  );
+	
+	    always_comb
             begin
                 if (DrawX < 10'd163 || DrawX > 10'd480 || DrawY < 10'd51 || DrawY > 10'd430)    // outer bound
                 begin
