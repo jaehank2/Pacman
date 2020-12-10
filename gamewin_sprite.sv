@@ -1,6 +1,6 @@
 module winscreen_sprite(input [9:0] addr,
                         output [639:0] data
-                       );
+                       ); // prints YOU WIN!!!
   
   parameter [0:479][639:0] ROM = {
 
