@@ -28,7 +28,7 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,	//X,Y 
           d49, d50, d51, d52, d53, d54, d55, d56, d57, d58, d59, d60, d61, d62, d63, d64, d65, d66, d67, d68, d69, d70, d71, d72, 
           d73, d74, d75, d76, d77, d78, d79, d80, d81, d82, d83, d84, d85, d86, d87, d88, d89, d90, d91, d92, d93, d94, d95, d96;
 	//	logic array [95:0];    // create array for 96 dots - should be initialized to 0 by default
-
+ 
 	  
 	logic [31:0]pac_data, ghost_data, oghost_data;
 	logic [7:0]pac_addr, ghost_addr, oghost_addr;
