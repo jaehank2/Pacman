@@ -169,8 +169,6 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 
 vga_controller vga_controller1(.Clk(Clk), .Reset(Reset_h), .hs(VGA_HS), .vs(VGA_VS), .pixel_clk(VGA_Clk), .blank(blank), .sync(sync), .DrawX(drawxsig), .DrawY(drawysig));
 ball ball1(.Reset(resetall), .frame_clk(VGA_VS), .keycode(keycode), .BallX(ballxsig), .BallY(ballysig), .BallS(ballsizesig), .x_motion(x_motion), .y_motion(y_motion), .flag(flag) );
-//color_mapper color_mapper1(.BallX(ballxsig), .BallY(ballysig), .DrawX(drawxsig), .DrawY(drawysig), .Ball_size(ballsizesig), .flag(flag), .Red(Red), .Green(Green), .Blue(Blue));
-//ghost ghost1(.BallX(ballxsig), .BallY(ballysig), .x_motion(x_motion), .y_motion(y_motion), .Reset(Reset_h), .frame_clk(VGA_VS), .ghostX(ghostxsig), .ghostY(ghostysig), .ghostS(ghostsizesig));
 wingame win1(.array(array), .win(win));
 
 gameover gover(.BallX(ballxsig), .BallY(ballysig), .Ball_size(ballsizesig), .ghostX(ghostxsig), .ghostY(ghostysig), .ghostS(ghostsizesig), .OghostX(Oghostxsig), .OghostY(Oghostysig), .OghostS(Oghostsizesig), .over(over));
