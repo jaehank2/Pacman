@@ -1,9 +1,9 @@
-module character_sprites( input [7:0]	addr,
-						output [31:0]	data
-					 );
+module character_sprites(input [7:0]	addr,
+			 output [31:0]	data
+			);
 
 	parameter ADDR_WIDTH = 8;
-   parameter DATA_WIDTH =  32;
+   	parameter DATA_WIDTH =  32;
 
 	// ROM definition
 	parameter [0:159][31:0] ROM = {
@@ -77,7 +77,7 @@ module character_sprites( input [7:0]	addr,
 		32'b 00000000000000000000000000000000,
 		
 		
-						//Pacman facing down
+		//Pacman facing down
 		32'b 00000000000000000000000000000000,
 		32'b 00000000000000000000000000000000,
 		32'b 00000000000000000000000000000000,
@@ -111,7 +111,7 @@ module character_sprites( input [7:0]	addr,
 		32'b 00000000000000000000000000000000,
 		32'b 00000000000000000000000000000000,
 		
-				//Pacman facing up
+		//Pacman facing up
 		32'b 00000000000000000000000000000000,
 		32'b 00000000000000000000000000000000,
 		32'b 00000000000000000000000000000000,
