@@ -1,6 +1,6 @@
 module endscreen_sprite(input [9:0] addr,
                         output [639:0] data
-                       );
+                       ); // prints YOU LOSE !!!
   
   parameter [0:479][639:0] ROM = {
 
