@@ -1,6 +1,6 @@
-module map_sprite( input [9:0]	addr,
-						output [639:0]	data
-					 );
+module map_sprite(input [9:0] addr,
+		  output [639:0] data
+		 );
 
 	// ROM definition
 	parameter [0:479][639:0] ROM = {
