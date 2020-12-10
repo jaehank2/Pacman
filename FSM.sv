@@ -4,7 +4,7 @@ module FSM(input logic Reset, Clk,
 	   output reseton,	// reset after game ends
            output [1:0] level
           );
-        
+         
 
 	enum logic [2:0] {RES, START, OVER, WIN} curr_state, next_state;
         logic [7:0] Enter;
