@@ -1,6 +1,6 @@
 module wall_bounds(input [9:0]  DrawX, DrawY,	
 		   output logic wall_en
-		  );
+		  );	// wall_en = 1 for wall bounds
 	
 	    always_comb
             begin
