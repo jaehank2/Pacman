@@ -13,9 +13,9 @@
 //-------------------------------------------------------------------------
 
 
-module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
+module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,	//X,Y = center, size = radius
 		       input [9:0] ghostX, ghostY, ghostS, OghostX, OghostY, OghostS,
-		       input [1:0] flag,
+		       input [1:0] flag,	//indicates direction
 		       input [1:0] level,
                        input logic Reset, Clk,  // added for always ff block
                        output logic [7:0]  Red, Green, Blue,
@@ -27,7 +27,7 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 	  d25, d26, d27, d28, d29, d30, d31, d32, d33, d34, d35, d36, d37, d38, d39, d40, d41, d42, d43, d44, d45, d46, d47, d48, 
           d49, d50, d51, d52, d53, d54, d55, d56, d57, d58, d59, d60, d61, d62, d63, d64, d65, d66, d67, d68, d69, d70, d71, d72, 
           d73, d74, d75, d76, d77, d78, d79, d80, d81, d82, d83, d84, d85, d86, d87, d88, d89, d90, d91, d92, d93, d94, d95, d96;
-//	logic array [95:0];    // create array for 10 dots - should be initialized to 0 by default
+	//	logic array [95:0];    // create array for 96 dots - should be initialized to 0 by default
 
 	  
 	logic [31:0]pac_data, ghost_data, oghost_data;
@@ -40,7 +40,6 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 //	assign score =2'd00;
 	 
 	character_sprites pacman(.addr(pac_addr), .data(pac_data));
-	//character_sprites ghost(.addr(ghost_addr), .data(ghost_data));
 	ghost_sprite ghost(.addr(ghost_addr), .data(ghost_data));
 	ghost_sprite Oghost(.addr(oghost_addr), .data(oghost_data));
 	map_sprite map(.addr(map_addr), .data(map_data));
@@ -111,7 +110,7 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 			end_addr = 10'b0000000000;
 			end_on = 1'b0;
 		end
-	if (DrawX < 640 && DrawY <= 480 && level == 2'b11)
+		if (DrawX < 640 && DrawY <= 480 && level == 2'b11)
 		begin
 			win_addr = DrawY;
 			win_on = 1'b1;
@@ -122,7 +121,8 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 			win_on = 1'b0;
 		end
 	end
-		
+	
+	// mark position for all dots
 	always_comb
 	begin
 		d1 = 1'b0;
@@ -817,8 +817,9 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 	end
 
 
-
-	always_ff @ (posedge Clk) // check if dot consumed or not
+	// check if dot consumed or not
+	// if consumed, corresponding array is set to 1
+	always_ff @ (posedge Clk)
 	begin
     		if (Reset)
     		begin
@@ -1325,14 +1326,14 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
     	always_comb
     	begin:RGB_Display
     	    	if ((ball_on == 1'b1) && pac_data[DrawX - BallX + Ball_size] == 1'b1)
-    	    	// yellow 
+    	    	// yellow for pacman
     	    	begin
     	    	    	Red = 8'hff;
     	    	    	Green = 8'hff;
     	    	    	Blue = 8'h00;
     	    	end
 		else if (ghost_on == 1'b1 && ghost_data[DrawX - ghostX + ghostS] == 1'b1)
-		// light blue for ghost
+		// light blue for ghost1
 		begin
 			Red = 8'h01;
 			Green = 8'hff;
@@ -1340,14 +1341,14 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 		end
 		
 		else if (oghost_on == 1'b1 && oghost_data[DrawX - OghostX +OghostS] == 1'b1)
-		// light blue for ghost
+		// orange for ghost2
 		begin
 			Red = 8'hff;
 			Green = 8'hb8;
 			Blue = 8'h52;
 		end
 		
-    	 else if (map_on == 1'b1 && map_data[DrawX] == 1'b1 && (DrawX > 10'd305 && DrawX <10'd334 && DrawY == 10'd208))
+    	 	else if (map_on == 1'b1 && map_data[DrawX] == 1'b1 && (DrawX > 10'd305 && DrawX <10'd334 && DrawY == 10'd208))
     	    	// skin color for middle box
 		begin
 			    Red = 8'hDE;
@@ -1355,9 +1356,8 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 			    Blue = 8'h85;
 		end 
 		else if(map_on == 1'b1 && map_data[DrawX] == 1'b1)
-    	    	// blue
+    	    	// blue for wall bounds
 		begin
-		//1919A6 or 0000ff
 			    Red = 8'h21;
 			    Green = 8'h21;
 			    Blue = 8'hDE;
@@ -1945,7 +1945,7 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 		end
 
 	
-        	// if consumed, color it black
+		// if consumed, color it black (background color)
         	else if(d1 == 1'b1 && dot_data[DrawX] == 1'b1 && array[0] == 1'b1 && end_on == 1'b0)
 		begin
 		    	Red = 8'h00;
@@ -2529,13 +2529,15 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
 			Green = 8'h00;
 			Blue = 8'h00;
 		end
-      else if(win_data[DrawX] ==1'b1 && win_on ==1'b1)
+      		else if (win_data[DrawX] ==1'b1 && win_on ==1'b1)
+		// colors YOU WIN green
 		begin
 			Red = 8'h00;
 			Green = 8'hFF;
 			Blue = 8'h11;
 		end
 		else
+		// black
         	begin 
         	    	Red = 8'h00; 
         	    	Green = 8'h00;
