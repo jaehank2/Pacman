@@ -2523,7 +2523,7 @@ module  Color_mapper ( input [9:0] BallX, BallY, DrawX, DrawY, Ball_size,	//X,Y 
 		    	Blue = 8'h00;
 		end
 		else if (end_on == 1'b1 && end_data[DrawX] == 1'b1)
-		// colors YOU LOSE blue
+		// colors YOU LOSE red
 		begin
 			Red = 8'hFF;
 			Green = 8'h00;
