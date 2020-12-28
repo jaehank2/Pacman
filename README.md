@@ -1,5 +1,4 @@
 <h1 align="center"> Pacman </h1>
-<h2 align="center"> John Kim | Henry Guan
 
 ## Overview ##
 Implemented the game Pacman using SystemVerilog and the FPGA (DE10-Lite) for ECE385 Final Project. To win, the Pacman has to eat all the pellets without running into the ghosts and the user can play with W,A,S,D as the arrow keys.
