@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 #              VARIABLES APPENDED TO BY INCLUDED MAKEFILE FRAGMENTS
-#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------ 
 
 # List of include directories for -I compiler option (-I added when used).
 # Includes the BSP.
